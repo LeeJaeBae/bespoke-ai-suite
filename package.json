@@ -1,0 +1,60 @@
+{
+  "name": "bespoke-ai-suite",
+  "version": "1.0.0",
+  "description": "AI-powered content generation and marketing campaign optimization platform",
+  "private": true,
+  "workspaces": [
+    "services/*",
+    "packages/*",
+    "frontend/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:services",
+    "dev:services": "concurrently \"npm run dev:content\" \"npm run dev:frontend\"",
+    "dev:content": "cd services/content && npm run dev",
+    "dev:frontend": "cd frontend/web && npm run dev",
+    "build": "npm run build:all",
+    "build:all": "npm run build:services && npm run build:frontend",
+    "build:services": "npm run build -ws services/*",
+    "build:frontend": "npm run build -w frontend/web",
+    "test": "npm run test -ws",
+    "test:unit": "npm run test:unit -ws",
+    "test:integration": "npm run test:integration -ws",
+    "test:e2e": "npm run test:e2e -w tests/e2e",
+    "lint": "npm run lint -ws",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "setup": "npm install && npm run setup:env && npm run setup:db",
+    "setup:env": "cp .env.example .env.local",
+    "setup:db": "docker-compose up -d postgres mongodb redis",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "clean": "npm run clean -ws && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.5.0",
+    "prettier": "^3.3.2",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=23.0.0",
+    "npm": ">=10.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bespoke-ai/suite.git"
+  },
+  "keywords": [
+    "ai",
+    "content-generation",
+    "marketing",
+    "saas",
+    "microservices"
+  ],
+  "author": "Bespoke AI Team",
+  "license": "MIT"
+}
