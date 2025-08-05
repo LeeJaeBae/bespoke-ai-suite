@@ -27,7 +27,7 @@
 
 ### 대시보드에서 캠페인 생성
 
-1. [캠페인 대시보드](https://dashboard.bespoke-ai.com/campaigns) 접속
+1. [캠페인 대시보드](https://dashboard.thebespoke-ai.com/campaigns) 접속
 2. "새 캠페인" 버튼 클릭
 3. 캠페인 정보 입력:
    - 이름: "2025 여름 프로모션"
@@ -37,7 +37,7 @@
 ### API를 통한 캠페인 생성
 
 ```bash
-curl -X POST https://api.bespoke-ai.com/v1/campaigns \
+curl -X POST https://api.thebespoke-ai.com/v1/campaigns \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -77,7 +77,7 @@ curl -X POST https://api.bespoke-ai.com/v1/campaigns \
     "name": "2025 여름 프로모션",
     "status": "draft",
     "created_at": "2025-08-04T10:45:00Z",
-    "dashboard_url": "https://dashboard.bespoke-ai.com/campaigns/campaign_789xyz"
+    "dashboard_url": "https://dashboard.thebespoke-ai.com/campaigns/campaign_789xyz"
   }
 }
 ```
@@ -87,7 +87,7 @@ curl -X POST https://api.bespoke-ai.com/v1/campaigns \
 ### 콘텐츠 캘린더 생성
 
 ```bash
-curl -X POST https://api.bespoke-ai.com/v1/campaigns/campaign_789xyz/content-plan \
+curl -X POST https://api.thebespoke-ai.com/v1/campaigns/campaign_789xyz/content-plan \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -156,7 +156,7 @@ async function scheduleContentGeneration() {
 ### 이메일 제목 A/B 테스트
 
 ```bash
-curl -X POST https://api.bespoke-ai.com/v1/campaigns/campaign_789xyz/ab-tests \
+curl -X POST https://api.thebespoke-ai.com/v1/campaigns/campaign_789xyz/ab-tests \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -303,7 +303,7 @@ for topic in topics:
 const WebSocket = require('ws');
 
 function monitorCampaignPerformance(campaignId) {
-  const ws = new WebSocket('wss://api.bespoke-ai.com/v1/campaigns/stream');
+  const ws = new WebSocket('wss://api.thebespoke-ai.com/v1/campaigns/stream');
   
   ws.on('open', () => {
     ws.send(JSON.stringify({
@@ -382,7 +382,7 @@ schedule.every().monday.at("09:00").do(
 ### 자동 최적화 설정
 
 ```bash
-curl -X POST https://api.bespoke-ai.com/v1/campaigns/campaign_789xyz/optimization \
+curl -X POST https://api.thebespoke-ai.com/v1/campaigns/campaign_789xyz/optimization \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -563,10 +563,10 @@ if (campaign.metrics.ctr < benchmark.ctr * 0.8) {
 ### 기술적 문제
 ```bash
 # 캠페인 상태 확인
-curl -X GET https://api.bespoke-ai.com/v1/campaigns/campaign_789xyz/health
+curl -X GET https://api.thebespoke-ai.com/v1/campaigns/campaign_789xyz/health
 
 # 로그 확인
-curl -X GET https://api.bespoke-ai.com/v1/campaigns/campaign_789xyz/logs
+curl -X GET https://api.thebespoke-ai.com/v1/campaigns/campaign_789xyz/logs
 ```
 
 ## 다음 단계

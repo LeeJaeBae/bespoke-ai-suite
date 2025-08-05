@@ -50,7 +50,7 @@
 
 ### Q: 계정을 어떻게 생성하나요?
 **A:** 계정 생성 방법:
-1. [bespoke-ai.com](https://bespoke-ai.com)에서 "무료 체험 시작" 클릭
+1. [thebespoke-ai.com](https://thebespoke-ai.com)에서 "무료 체험 시작" 클릭
 2. 이메일, 회사명, 업종 정보 입력
 3. 이메일 인증 완료
 4. 초기 설정 마법사 진행
@@ -153,7 +153,7 @@
 ### Q: API를 사용하려면 어떻게 시작해야 하나요?
 **A:** API 시작 단계:
 1. **API 키 발급**: 대시보드에서 API 키 생성
-2. **문서 확인**: [API 문서](https://docs.bespoke-ai.com/api) 참조
+2. **문서 확인**: [API 문서](https://docs.thebespoke-ai.com/api) 참조
 3. **SDK 설치**: 원하는 언어의 SDK 설치
 4. **인증 설정**: Bearer 토큰으로 인증
 5. **첫 API 호출**: 간단한 콘텐츠 생성 테스트
@@ -317,7 +317,7 @@
 
 ### Q: 고객 지원은 어떻게 받을 수 있나요?
 **A:** 지원 채널:
-- **이메일**: support@bespoke-ai.com (24시간 내 응답)
+- **이메일**: support@thebespoke-ai.com (24시간 내 응답)
 - **라이브 채팅**: 평일 9:00-18:00 (KST)
 - **전화**: +82-2-1234-5678 (Professional 이상)
 - **기술 지원**: 개발자 전용 Slack 채널
@@ -344,26 +344,26 @@
 
 ### Q: 서비스 상태를 확인할 수 있나요?
 **A:** 상태 확인 방법:
-- **상태 페이지**: [status.bespoke-ai.com](https://status.bespoke-ai.com)
+- **상태 페이지**: [status.thebespoke-ai.com](https://status.thebespoke-ai.com)
 - **알림 구독**: 이메일/SMS로 장애 알림
 - **모바일 앱**: 실시간 상태 확인
-- **소셜 미디어**: Twitter @BespokeAIStatus
+- **소셜 미디어**: Twitter @TheBespokeAIStatus
 
 ---
 
 ## 빠른 링크
 
 ### 주요 리소스
-- 📖 [사용자 가이드](https://docs.bespoke-ai.com/guides)
-- 🔧 [API 문서](https://docs.bespoke-ai.com/api)
-- 🎥 [비디오 튜토리얼](https://youtube.com/BespokeAI)
-- 💬 [커뮤니티](https://community.bespoke-ai.com)
+- 📖 [사용자 가이드](https://docs.thebespoke-ai.com/guides)
+- 🔧 [API 문서](https://docs.thebespoke-ai.com/api)
+- 🎥 [비디오 튜토리얼](https://youtube.com/TheBespokeAI)
+- 💬 [커뮤니티](https://community.thebespoke-ai.com)
 
 ### 지원 연락처
-- 📧 **일반 문의**: support@bespoke-ai.com
-- 🔧 **기술 지원**: tech-support@bespoke-ai.com
-- 💼 **영업 문의**: sales@bespoke-ai.com
-- 📰 **미디어 문의**: press@bespoke-ai.com
+- 📧 **일반 문의**: support@thebespoke-ai.com
+- 🔧 **기술 지원**: tech-support@thebespoke-ai.com
+- 💼 **영업 문의**: sales@thebespoke-ai.com
+- 📰 **미디어 문의**: press@thebespoke-ai.com
 
 ---
 
@@ -371,8 +371,8 @@
 
 이 FAQ에서 답을 찾지 못하셨나요? 
 
-📝 **개선 제안**: docs-feedback@bespoke-ai.com으로 의견을 보내주세요.  
-🆕 **새로운 질문 추가**: support@bespoke-ai.com으로 자주 묻는 질문을 제보해주세요.
+📝 **개선 제안**: docs-feedback@thebespoke-ai.com으로 의견을 보내주세요.  
+🆕 **새로운 질문 추가**: support@thebespoke-ai.com으로 자주 묻는 질문을 제보해주세요.
 
 ---
 

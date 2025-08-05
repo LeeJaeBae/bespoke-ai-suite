@@ -19,7 +19,7 @@
 
 ### 대시보드에서 API 키 발급
 
-1. [Bespoke AI Suite 대시보드](https://dashboard.bespoke-ai.com)에 로그인
+1. [Bespoke AI Suite 대시보드](https://dashboard.thebespoke-ai.com)에 로그인
 2. 설정 > API 키 메뉴로 이동
 3. "새 API 키 생성" 클릭
 4. 키 이름 입력 (예: "개발용 키")
@@ -40,7 +40,7 @@ $env:BESPOKE_API_KEY="your_api_key_here"
 ### 기본 텍스트 생성
 
 ```bash
-curl -X POST https://api.bespoke-ai.com/v1/contents \
+curl -X POST https://api.thebespoke-ai.com/v1/contents \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -71,7 +71,7 @@ curl -X POST https://api.bespoke-ai.com/v1/contents \
 ### 콘텐츠 상태 확인
 
 ```bash
-curl -X GET https://api.bespoke-ai.com/v1/contents/content_abc123 \
+curl -X GET https://api.thebespoke-ai.com/v1/contents/content_abc123 \
   -H "Authorization: Bearer $BESPOKE_API_KEY"
 ```
 
@@ -102,7 +102,7 @@ curl -X GET https://api.bespoke-ai.com/v1/contents/content_abc123 \
 ### SEO 최적화된 콘텐츠
 
 ```bash
-curl -X POST https://api.bespoke-ai.com/v1/contents \
+curl -X POST https://api.thebespoke-ai.com/v1/contents \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -126,7 +126,7 @@ curl -X POST https://api.bespoke-ai.com/v1/contents \
 ### 소셜 미디어 콘텐츠
 
 ```bash
-curl -X POST https://api.bespoke-ai.com/v1/contents \
+curl -X POST https://api.thebespoke-ai.com/v1/contents \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -149,7 +149,7 @@ curl -X POST https://api.bespoke-ai.com/v1/contents \
 ### 기본 이미지 생성
 
 ```bash
-curl -X POST https://api.bespoke-ai.com/v1/contents \
+curl -X POST https://api.thebespoke-ai.com/v1/contents \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -169,7 +169,7 @@ curl -X POST https://api.bespoke-ai.com/v1/contents \
 ### 브랜드 스타일 이미지
 
 ```bash
-curl -X POST https://api.bespoke-ai.com/v1/contents \
+curl -X POST https://api.thebespoke-ai.com/v1/contents \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -192,7 +192,7 @@ curl -X POST https://api.bespoke-ai.com/v1/contents \
 ### 짧은 프로모션 비디오
 
 ```bash
-curl -X POST https://api.bespoke-ai.com/v1/contents \
+curl -X POST https://api.thebespoke-ai.com/v1/contents \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -218,12 +218,12 @@ curl -X POST https://api.bespoke-ai.com/v1/contents \
 
 ```bash
 # 텍스트 콘텐츠
-curl -X GET https://api.bespoke-ai.com/v1/contents/content_abc123/download \
+curl -X GET https://api.thebespoke-ai.com/v1/contents/content_abc123/download \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -o "my-content.md"
 
 # 이미지 콘텐츠
-curl -X GET https://api.bespoke-ai.com/v1/contents/content_def456/download \
+curl -X GET https://api.thebespoke-ai.com/v1/contents/content_def456/download \
   -H "Authorization: Bearer $BESPOKE_API_KEY" \
   -o "my-image.png"
 ```
@@ -400,9 +400,9 @@ try {
 
 ## 지원
 
-- 문서: https://docs.bespoke-ai.com
-- 지원팀: support@bespoke-ai.com
-- 커뮤니티: https://community.bespoke-ai.com
+- 문서: https://docs.thebespoke-ai.com
+- 지원팀: support@thebespoke-ai.com
+- 커뮤니티: https://community.thebespoke-ai.com
 
 ---
 

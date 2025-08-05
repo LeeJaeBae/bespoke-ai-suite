@@ -8,7 +8,7 @@
   [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
   [![Build Status](https://img.shields.io/github/workflow/status/bespoke-ai/suite/CI)](https://github.com/bespoke-ai/suite/actions)
   [![Coverage](https://img.shields.io/codecov/c/github/bespoke-ai/suite)](https://codecov.io/gh/bespoke-ai/suite)
-  [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://docs.bespoke-ai.com)
+  [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://docs.thebespoke-ai.com)
 </div>
 
 ---
@@ -119,8 +119,8 @@ make dev
 - [개발자 가이드](docs/guides/developer-onboarding.md)
 
 ### API 문서
-- [REST API Reference](https://api.bespoke-ai.com/docs)
-- [GraphQL Playground](https://api.bespoke-ai.com/graphql)
+- [REST API Reference](https://api.thebespoke-ai.com/docs)
+- [GraphQL Playground](https://api.thebespoke-ai.com/graphql)
 - [웹훅 가이드](docs/api/webhooks.md)
 
 ### 튜토리얼
@@ -169,7 +169,7 @@ Bespoke AI Suite는 오픈소스 프로젝트입니다. 기여를 환영합니�
 
 ## 🛡 보안
 
-보안 취약점을 발견하셨나요? [security@bespoke-ai.com](mailto:security@bespoke-ai.com)으로 연락해주세요.
+보안 취약점을 발견하셨나요? [security@thebespoke-ai.com](mailto:security@thebespoke-ai.com)으로 연락해주세요.
 자세한 내용은 [SECURITY.md](SECURITY.md)를 참조하세요.
 
 ## 📄 라이선스
@@ -180,10 +180,10 @@ Bespoke AI Suite는 오픈소스 프로젝트입니다. 기여를 환영합니�
 
 <div align="center">
   <p>
-    <a href="https://bespoke-ai.com">웹사이트</a> •
-    <a href="https://docs.bespoke-ai.com">문서</a> •
-    <a href="https://blog.bespoke-ai.com">블로그</a> •
-    <a href="https://community.bespoke-ai.com">커뮤니티</a>
+    <a href="https://thebespoke-ai.com">웹사이트</a> •
+    <a href="https://docs.thebespoke-ai.com">문서</a> •
+    <a href="https://blog.thebespoke-ai.com">블로그</a> •
+    <a href="https://community.thebespoke-ai.com">커뮤니티</a>
   </p>
   <p>
     Made with ❤️ by the Bespoke AI Team

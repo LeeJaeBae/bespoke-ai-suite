@@ -40,7 +40,7 @@ require('dotenv').config();
 const config = {
   apiKey: process.env.BESPOKE_API_KEY,
   apiSecret: process.env.BESPOKE_API_SECRET,
-  baseURL: 'https://api.bespoke-ai.com/v1'
+  baseURL: 'https://api.thebespoke-ai.com/v1'
 };
 ```
 
@@ -54,7 +54,7 @@ from requests.auth import HTTPBearerAuth
 class BespokeAPIClient:
     def __init__(self):
         self.api_key = os.getenv('BESPOKE_API_KEY')
-        self.base_url = 'https://api.bespoke-ai.com/v1'
+        self.base_url = 'https://api.thebespoke-ai.com/v1'
         self.session = requests.Session()
         self.session.auth = HTTPBearerAuth(self.api_key)
         self.session.headers.update({
@@ -659,7 +659,7 @@ import { gql } from 'graphql-tag';
 
 class BespokeGraphQLClient {
   constructor(apiKey) {
-    this.client = new GraphQLClient('https://api.bespoke-ai.com/graphql', {
+    this.client = new GraphQLClient('https://api.thebespoke-ai.com/graphql', {
       headers: {
         Authorization: `Bearer ${apiKey}`,
       },
@@ -734,7 +734,7 @@ class BespokeGraphQLClient {
 
     // WebSocket 연결 설정
     const wsClient = new SubscriptionClient(
-      'wss://api.bespoke-ai.com/graphql',
+      'wss://api.thebespoke-ai.com/graphql',
       {
         reconnect: true,
         connectionParams: {
@@ -798,7 +798,7 @@ import asyncio
 class GraphQLIntegration:
     def __init__(self, api_key):
         transport = AIOHTTPTransport(
-            url='https://api.bespoke-ai.com/graphql',
+            url='https://api.thebespoke-ai.com/graphql',
             headers={'Authorization': f'Bearer {api_key}'}
         )
         self.client = Client(transport=transport, fetch_schema_from_transport=True)
@@ -1449,10 +1449,10 @@ const connectionPool = new ConnectionPool({
 });
 
 const optimizedClient = axios.create({
-  baseURL: 'https://api.bespoke-ai.com/v1',
+  baseURL: 'https://api.thebespoke-ai.com/v1',
   timeout: 30000,
-  httpAgent: connectionPool.getAgent('http://api.bespoke-ai.com'),
-  httpsAgent: connectionPool.getAgent('https://api.bespoke-ai.com'),
+  httpAgent: connectionPool.getAgent('http://api.thebespoke-ai.com'),
+  httpsAgent: connectionPool.getAgent('https://api.thebespoke-ai.com'),
 });
 
 // 요청/응답 인터셉터

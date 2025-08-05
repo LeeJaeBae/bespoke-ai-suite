@@ -28,6 +28,7 @@ obj/
 .env.local
 .env.*.local
 *.env
+!.env.example
 
 # Logs
 logs/
@@ -128,3 +129,5 @@ redis-data/
 # Kafka data
 kafka-data/
 zookeeper-data/
+# SpecStory explanation file
+.specstory/.what-is-this.md

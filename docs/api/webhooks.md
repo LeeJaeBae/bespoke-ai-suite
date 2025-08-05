@@ -138,7 +138,7 @@ Content-Type: application/json
       "word_count": 1523,
       "created_at": "2025-08-04T10:30:00Z",
       "completed_at": "2025-08-04T10:31:45Z",
-      "download_url": "https://download.bespoke-ai.com/content_123456",
+      "download_url": "https://download.thebespoke-ai.com/content_123456",
       "download_expires_at": "2025-08-11T10:31:45Z"
     },
     "campaign_id": "campaign_789",
@@ -509,4 +509,4 @@ webhookQueue.process('process', async (job) => {
 
 ---
 
-*웹훅 시스템은 지속적으로 개선되고 있습니다. 최신 업데이트는 [API 문서](https://api.bespoke-ai.com/docs)를 참조하세요.*
+*웹훅 시스템은 지속적으로 개선되고 있습니다. 최신 업데이트는 [API 문서](https://api.thebespoke-ai.com/docs)를 참조하세요.*

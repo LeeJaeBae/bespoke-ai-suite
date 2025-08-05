@@ -337,10 +337,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - api.bespoke-ai.com
+    - api.thebespoke-ai.com
     secretName: api-tls
   rules:
-  - host: api.bespoke-ai.com
+  - host: api.thebespoke-ai.com
     http:
       paths:
       - path: /

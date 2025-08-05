@@ -51,8 +51,8 @@ Zero Trust 보안 아키텍처를 기반으로 한 포괄적인 보안 시스템
     generateTokens(payload: Omit<TokenPayload, 'iat' | 'exp'>) {
       const accessToken = jwt.sign(payload, this.accessTokenSecret, {
         expiresIn: this.accessTokenExpiry,
-        issuer: 'bespoke-ai',
-        audience: 'bespoke-ai-users'
+        issuer: 'thebespoke-ai',
+        audience: 'thebespoke-ai-users'
       });
       
       const refreshToken = jwt.sign(
@@ -257,8 +257,8 @@ Zero Trust 보안 아키텍처를 기반으로 한 포괄적인 보안 시스템
   const corsOptions = {
     origin: (origin: string | undefined, callback: Function) => {
       const allowedOrigins = [
-        'https://app.bespoke-ai.com',
-        'https://bespoke-ai.com',
+        'https://app.thebespoke-ai.com',
+        'https://thebespoke-ai.com',
         process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : null
       ].filter(Boolean);
       
@@ -290,7 +290,7 @@ Zero Trust 보안 아키텍처를 기반으로 한 포괄적인 보안 시스템
         fontSrc: ["'self'", "https://fonts.gstatic.com"],
         imgSrc: ["'self'", "data:", "https:"],
         scriptSrc: ["'self'"],
-        connectSrc: ["'self'", "https://api.bespoke-ai.com"],
+        connectSrc: ["'self'", "https://api.thebespoke-ai.com"],
         frameSrc: ["'none'"],
         objectSrc: ["'none'"]
       }
@@ -600,7 +600,7 @@ Zero Trust 보안 아키텍처를 기반으로 한 포괄적인 보안 시스템
   apiVersion: policy/v1beta1
   kind: PodSecurityPolicy
   metadata:
-    name: bespoke-ai-psp
+    name: thebespoke-ai-psp
   spec:
     privileged: false
     allowPrivilegeEscalation: false

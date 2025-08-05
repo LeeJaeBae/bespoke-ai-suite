@@ -723,14 +723,14 @@ ingress:
   enabled: true
   className: nginx
   hosts:
-    - host: staging.bespoke-ai.com
+    - host: staging.thebespoke-ai.com
       paths:
         - path: /
           pathType: Prefix
   tls:
     - secretName: staging-tls
       hosts:
-        - staging.bespoke-ai.com
+        - staging.thebespoke-ai.com
 ```
 
 ### 프로덕션 환경

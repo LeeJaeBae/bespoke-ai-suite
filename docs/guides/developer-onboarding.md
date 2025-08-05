@@ -533,8 +533,8 @@ pip install -r requirements.txt
 
 ### 10.3 팀 연락처
 - **Slack**: #dev-general, #dev-help
-- **이메일**: dev-team@bespoke-ai.com
-- **위키**: https://wiki.bespoke-ai.com
+- **이메일**: dev-team@thebespoke-ai.com
+- **위키**: https://wiki.thebespoke-ai.com
 - **온콜**: PagerDuty 통해 연락
 
 ### 10.4 멘토 프로그램

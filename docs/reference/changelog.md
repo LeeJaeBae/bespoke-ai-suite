@@ -187,18 +187,18 @@
 1. **API 키 업데이트**
    ```bash
    # 기존 API 키를 새 형식으로 마이그레이션
-   curl -X POST https://api.bespoke-ai.com/v2/auth/migrate \
+   curl -X POST https://api.thebespoke-ai.com/v2/auth/migrate \
      -H "Authorization: Bearer OLD_API_KEY"
    ```
 
 2. **SDK 업데이트**
    ```bash
-   npm install @bespoke-ai/sdk@^1.0.0
+   npm install @thebespoke-ai/sdk@^1.0.0
    ```
 
 3. **Webhook URL 업데이트**
-   - 기존: `https://api.bespoke-ai.com/webhooks`
-   - 신규: `https://api.bespoke-ai.com/v2/webhooks`
+   - 기존: `https://api.thebespoke-ai.com/webhooks`
+   - 신규: `https://api.thebespoke-ai.com/v2/webhooks`
 
 #### 주요 변경사항
 - **GraphQL 엔드포인트**: `/graphql`에서 `/v2/graphql`로 변경
@@ -216,13 +216,13 @@
 ### 자동 마이그레이션 도구
 ```bash
 # CLI 도구로 자동 마이그레이션
-npx @bespoke-ai/cli migrate --from=0.9 --to=1.0
+npx @thebespoke-ai/cli migrate --from=0.9 --to=1.0
 ```
 
 ### 수동 마이그레이션 가이드
-1. [API 마이그레이션 가이드](https://docs.bespoke-ai.com/migration/api)
-2. [SDK 업그레이드 가이드](https://docs.bespoke-ai.com/migration/sdk)
-3. [데이터 마이그레이션 가이드](https://docs.bespoke-ai.com/migration/data)
+1. [API 마이그레이션 가이드](https://docs.thebespoke-ai.com/migration/api)
+2. [SDK 업그레이드 가이드](https://docs.thebespoke-ai.com/migration/sdk)
+3. [데이터 마이그레이션 가이드](https://docs.thebespoke-ai.com/migration/data)
 
 ---
 
@@ -243,23 +243,23 @@ npx @bespoke-ai/cli migrate --from=0.9 --to=1.0
 ## 피드백 및 제안
 
 ### 버그 리포트
-- **GitHub Issues**: [github.com/bespoke-ai/issues](https://github.com/bespoke-ai/issues)
-- **이메일**: bugs@bespoke-ai.com
-- **지원 센터**: [support.bespoke-ai.com](https://support.bespoke-ai.com)
+- **GitHub Issues**: [github.com/thebespoke-ai/issues](https://github.com/thebespoke-ai/issues)
+- **이메일**: bugs@thebespoke-ai.com
+- **지원 센터**: [support.thebespoke-ai.com](https://support.thebespoke-ai.com)
 
 ### 기능 요청
-- **로드맵 투표**: [roadmap.bespoke-ai.com](https://roadmap.bespoke-ai.com)
-- **커뮤니티**: [community.bespoke-ai.com](https://community.bespoke-ai.com)
-- **이메일**: feature-request@bespoke-ai.com
+- **로드맵 투표**: [roadmap.thebespoke-ai.com](https://roadmap.thebespoke-ai.com)
+- **커뮤니티**: [community.thebespoke-ai.com](https://community.thebespoke-ai.com)
+- **이메일**: feature-request@thebespoke-ai.com
 
 ---
 
 ## 릴리스 알림
 
 ### 구독 방법
-- **이메일 뉴스레터**: [subscribe.bespoke-ai.com](https://subscribe.bespoke-ai.com)
-- **RSS 피드**: [releases.bespoke-ai.com/feed.xml](https://releases.bespoke-ai.com/feed.xml)
-- **Twitter**: [@BespokeAI](https://twitter.com/BespokeAI)
+- **이메일 뉴스레터**: [subscribe.thebespoke-ai.com](https://subscribe.thebespoke-ai.com)
+- **RSS 피드**: [releases.thebespoke-ai.com/feed.xml](https://releases.thebespoke-ai.com/feed.xml)
+- **Twitter**: [@TheBespokeAI](https://twitter.com/TheBespokeAI)
 - **Slack 알림**: 워크스페이스에 봇 추가
 
 ### 릴리스 노트 형식
@@ -269,4 +269,4 @@ npx @bespoke-ai/cli migrate --from=0.9 --to=1.0
 
 ---
 
-*이 변경 이력은 지속적으로 업데이트됩니다. 최신 정보는 [releases.bespoke-ai.com](https://releases.bespoke-ai.com)에서 확인하세요! 🚀*
+*이 변경 이력은 지속적으로 업데이트됩니다. 최신 정보는 [releases.thebespoke-ai.com](https://releases.thebespoke-ai.com)에서 확인하세요! 🚀*

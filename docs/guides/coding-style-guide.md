@@ -79,7 +79,7 @@ const items = [];
 
 // 상수는 UPPER_SNAKE_CASE
 const MAX_RETRY_COUNT = 3;
-const API_BASE_URL = 'https://api.bespoke-ai.com';
+const API_BASE_URL = 'https://api.thebespoke-ai.com';
 ```
 
 ### 함수명

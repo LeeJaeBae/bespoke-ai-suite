@@ -230,7 +230,7 @@ export function checkAccess(
 # nginx.conf
 server {
     listen 443 ssl http2;
-    server_name api.bespoke-ai.com;
+    server_name api.thebespoke-ai.com;
     
     # TLS 1.3만 허용
     ssl_protocols TLSv1.3;

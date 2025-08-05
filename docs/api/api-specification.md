@@ -3,7 +3,7 @@
 > 버전: 1.0.0  
 > 작성일: 2025년 8월 4일  
 > API 버전: v1  
-> 기본 URL: `https://api.bespoke-ai.com/v1`
+> 기본 URL: `https://api.thebespoke-ai.com/v1`
 
 ## 목차
 
@@ -159,7 +159,7 @@ X-API-Key: {api_key}
     "status": "processing",
     "created_at": "2025-08-04T10:30:00Z",
     "estimated_completion": "2025-08-04T10:32:00Z",
-    "preview_url": "https://preview.bespoke-ai.com/content_123456",
+    "preview_url": "https://preview.thebespoke-ai.com/content_123456",
     "webhook_url": "https://api.customer.com/webhooks/content"
   }
 }
@@ -466,7 +466,7 @@ X-API-Key: {api_key}
     "content_id": "content_123456",
     "type": "text",
     "quality_score": 92,
-    "download_url": "https://download.bespoke-ai.com/content_123456"
+    "download_url": "https://download.thebespoke-ai.com/content_123456"
   },
   "signature": "sha256=..."
 }

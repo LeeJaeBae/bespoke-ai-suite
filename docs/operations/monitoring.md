@@ -920,8 +920,8 @@ data:
   alertmanager.yml: |
     global:
       smtp_smarthost: 'smtp.gmail.com:587'
-      smtp_from: 'alerts@bespoke-ai.com'
-      smtp_auth_username: 'alerts@bespoke-ai.com'
+      smtp_from: 'alerts@thebespoke-ai.com'
+      smtp_auth_username: 'alerts@thebespoke-ai.com'
       smtp_auth_password: 'app-password'
     
     route:
@@ -955,7 +955,7 @@ data:
     
     - name: 'critical-alerts'
       email_configs:
-      - to: 'oncall@bespoke-ai.com'
+      - to: 'oncall@thebespoke-ai.com'
         subject: '[CRITICAL] Bespoke AI Alert'
         body: |
           {{ range .Alerts }}
@@ -1012,7 +1012,7 @@ spec:
       annotations:
         summary: "Pod {{ $labels.pod }} is crash looping"
         description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is restarting {{ $value }} times per second"
-        grafana_url: "https://grafana.bespoke-ai.com/d/kubernetes/kubernetes-pods?var-namespace={{ $labels.namespace }}&var-pod={{ $labels.pod }}"
+        grafana_url: "https://grafana.thebespoke-ai.com/d/kubernetes/kubernetes-pods?var-namespace={{ $labels.namespace }}&var-pod={{ $labels.pod }}"
     
     - alert: KubernetesNodeNotReady
       expr: kube_node_status_condition{condition="Ready",status="true"} == 0
@@ -1039,7 +1039,7 @@ spec:
       annotations:
         summary: "High error rate on {{ $labels.service }}"
         description: "{{ $labels.service }} has error rate of {{ $value | humanizePercentage }}"
-        grafana_url: "https://grafana.bespoke-ai.com/d/application/application-overview?var-service={{ $labels.service }}"
+        grafana_url: "https://grafana.thebespoke-ai.com/d/application/application-overview?var-service={{ $labels.service }}"
     
     - alert: HighResponseTime
       expr: |

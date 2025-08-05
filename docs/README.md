@@ -119,7 +119,7 @@ docs/
 
 문서 관련 문의사항:
 - Slack: #docs 채널
-- Email: docs@bespoke-ai.com
+- Email: docs@thebespoke-ai.com
 
 ---
 

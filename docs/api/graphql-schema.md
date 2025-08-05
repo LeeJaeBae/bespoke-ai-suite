@@ -2,7 +2,7 @@
 
 > 버전: 1.0.0  
 > 작성일: 2025년 8월 4일  
-> GraphQL Endpoint: `https://api.bespoke-ai.com/graphql`
+> GraphQL Endpoint: `https://api.thebespoke-ai.com/graphql`
 
 ## 목차
 
@@ -30,7 +30,7 @@ Bespoke AI Suite GraphQL API는 RESTful API의 대안으로, 클라이언트가 
 - 효율적인 데이터 페칭
 
 ### GraphQL Playground
-개발 환경에서는 `https://api.bespoke-ai.com/graphql` 에서 인터랙티브 문서와 쿼리 테스트를 제공합니다.
+개발 환경에서는 `https://api.thebespoke-ai.com/graphql` 에서 인터랙티브 문서와 쿼리 테스트를 제공합니다.
 
 ## 2. 인증
 
@@ -373,7 +373,7 @@ type UsageAlert {
 ### WebSocket 연결
 ```javascript
 const wsClient = new SubscriptionClient(
-  'wss://api.bespoke-ai.com/graphql',
+  'wss://api.thebespoke-ai.com/graphql',
   {
     reconnect: true,
     connectionParams: {
