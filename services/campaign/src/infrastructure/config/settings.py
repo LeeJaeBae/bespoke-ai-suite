@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     
     # Server settings
     server_host: str = Field(default="0.0.0.0")
-    server_port: int = Field(default=8082)
+    server_port: int = Field(default=8085)
     debug: bool = Field(default=False)
     
     # API settings

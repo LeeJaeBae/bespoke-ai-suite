@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* 토스 스타일 CSS 변수 */
+    --primary: 0 176 107; /* #00B06B */
+    --primary-foreground: 255 255 255;
+    
+    --background: 255 255 255;
+    --foreground: 25 31 40; /* #191f28 */
+    
+    --card: 255 255 255;
+    --card-foreground: 25 31 40;
+    
+    --popover: 255 255 255;
+    --popover-foreground: 25 31 40;
+    
+    --secondary: 249 250 251;
+    --secondary-foreground: 25 31 40;
+    
+    --muted: 243 244 246;
+    --muted-foreground: 78 89 104; /* #4e5968 */
+    
+    --accent: 243 244 246;
+    --accent-foreground: 25 31 40;
+    
+    --destructive: 255 82 82; /* #FF5252 */
+    --destructive-foreground: 255 255 255;
+    
+    --border: 232 232 232;
+    --input: 232 232 232;
+    --ring: 0 176 107;
+    
+    --radius: 0.75rem;
+  }
+  
+  * {
+    border-color: rgb(var(--border));
+  }
+  
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  /* 토스 스타일 컨테이너 */
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 1280px;
+  }
+  
+  /* 토스 스타일 버튼 베이스 */
+  .btn-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition-property: all;
+    transition-duration: 200ms;
+  }
+  
+  /* 토스 스타일 인풋 베이스 */
+  .input-base {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(232 232 232);
+    background-color: white;
+    padding: 0.75rem 1rem;
+    transition-property: all;
+    transition-duration: 200ms;
+  }
+}
+
+@layer utilities {
+  /* 토스 스타일 텍스트 */
+  .text-heading-xl {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+  }
+  
+  .text-heading-lg {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+  }
+  
+  .text-heading-md {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+  }
+  
+  .text-heading-sm {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .text-body-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  
+  .text-body-md {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  
+  .text-body-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  
+  .text-body-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+  
+  /* 텍스트 색상 */
+  .text-text-primary {
+    color: rgb(25 31 40);
+  }
+  
+  .text-text-secondary {
+    color: rgb(78 89 104);
+  }
+  
+  .text-text-tertiary {
+    color: rgb(134 142 150);
+  }
+
+  /* 터치 친화적 UI 표준화 */
+  .touch-target {
+    min-height: 44px; /* iOS 권장 최소 터치 타겟 크기 */
+    min-width: 44px;
+    padding: 0.75rem; /* 12px */
+  }
+
+  .touch-target-small {
+    min-height: 36px; /* 작은 터치 타겟 */
+    min-width: 36px;
+    padding: 0.5rem; /* 8px */
+  }
+
+  .touch-target-large {
+    min-height: 56px; /* 큰 터치 타겟 */
+    min-width: 56px;
+    padding: 1rem; /* 16px */
+  }
+
+  /* 스와이프 제스처 최적화 */
+  .swipeable {
+    touch-action: pan-x; /* 가로 스와이프만 허용 */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .swipeable-vertical {
+    touch-action: pan-y; /* 세로 스와이프만 허용 */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 스크롤 최적화 */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 네이티브 앱 스타일 리스트 */
+  .native-list {
+    -webkit-appearance: none;
+    appearance: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* 모바일 호버 효과 비활성화 */
+  @media (hover: none) {
+    .hover\:scale-105:hover {
+      transform: none;
+    }
+  }
+
+  /* 다크 모드에서 스크롤바 스타일링 */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(156, 163, 175, 0.8);
+  }
+
+  /* Safe area inset 헬퍼 */
+  .safe-area-inset-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-inset-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-inset-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-area-inset-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* 모바일 viewport 최적화 */
+  .viewport-height {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  }
+
+  /* 모바일에서 텍스트 확대 방지 */
+  .prevent-zoom {
+    font-size: 16px; /* iOS Safari에서 줌 방지 */
+    transform-origin: center;
+  }
+
+  /* 터치 캘러스 효과 방지 */
+  .no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}

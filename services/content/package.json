@@ -32,12 +32,23 @@
     "@fastify/jwt": "^9.1.0",
     "@fastify/swagger": "^9.5.1",
     "@fastify/swagger-ui": "^5.2.3",
+    "@langchain/community": "^0.2.31",
+    "@langchain/core": "^0.2.27",
+    "@langchain/openai": "^0.2.7",
+    "axios": "^1.7.7",
     "dotenv": "^17.2.1",
     "fastify": "^5.4.0",
+    "graphql": "^16.11.0",
     "jsonwebtoken": "^9.0.2",
+    "kafkajs": "^2.2.4",
+    "langchain": "^0.2.16",
     "mongodb": "^6.18.0",
     "mongoose": "^8.17.0",
     "nanoid": "^5.0.9",
+    "openai": "^4.56.0",
+    "pino": "^9.3.2",
+    "pino-pretty": "^11.2.2",
+    "weaviate-ts-client": "^2.2.0",
     "zod": "^4.0.14"
   }
 }

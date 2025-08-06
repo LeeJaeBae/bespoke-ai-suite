@@ -1,0 +1,19 @@
+{
+  "name": "analytics-service-e2e-tests",
+  "version": "1.0.0",
+  "description": "Bespoke AI Suite Analytics Service E2E Tests with Playwright",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:install": "playwright install"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

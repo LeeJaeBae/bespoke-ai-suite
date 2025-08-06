@@ -1,0 +1,31 @@
+{
+  "name": "@bespoke/e2e-tests",
+  "version": "1.0.0",
+  "description": "Playwright E2E tests for Bespoke AI Suite",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:auth": "playwright test --grep @auth",
+    "test:content": "playwright test --grep @content",
+    "test:api": "playwright test --grep @api",
+    "test:performance": "playwright test --grep @performance",
+    "test:visual": "playwright test --grep @visual",
+    "install": "npx playwright install",
+    "install:deps": "npx playwright install-deps"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.46.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  },
+  "dependencies": {
+    "faker": "^6.6.6",
+    "@faker-js/faker": "^8.4.1"
+  }
+}

@@ -7,11 +7,11 @@ const contentSchema = {
   type: 'object',
   properties: {
     id: { type: 'string' },
-    type: { type: 'string', enum: ['TEXT', 'IMAGE', 'VIDEO'] },
+    type: { type: 'string', enum: ['text', 'image', 'video', 'audio', 'mixed'] },
     title: { type: 'string' },
     body: { type: 'string' },
     userId: { type: 'string' },
-    status: { type: 'string', enum: ['DRAFT', 'PUBLISHED', 'ARCHIVED'] },
+    status: { type: 'string', enum: ['draft', 'generating', 'reviewing', 'published', 'failed', 'archived'] },
     qualityScore: { type: 'number' },
     metadata: {
       type: 'object',
@@ -31,10 +31,44 @@ const contentSchema = {
 const createContentSchema = {
   body: {
     type: 'object',
-    required: ['type', 'prompt'],
+    required: ['type', 'title'],
     properties: {
-      type: { type: 'string', enum: ['TEXT', 'IMAGE', 'VIDEO'] },
-      prompt: { type: 'string', minLength: 10 },
+      type: { type: 'string', enum: ['text', 'image', 'video', 'audio', 'mixed'] },
+      title: { type: 'string', minLength: 1 },
+      prompt: { type: 'string' },
+      description: { type: 'string' },
+      platform: { type: 'string' },
+      status: { type: 'string', enum: ['draft', 'generating', 'reviewing', 'published', 'failed', 'archived'] },
+      tags: { type: 'array', items: { type: 'string' } },
+      metadata: {
+        type: 'object',
+        properties: {
+          keywords: { type: 'array', items: { type: 'string' } },
+          tags: { type: 'array', items: { type: 'string' } },
+          targetAudience: { type: 'string' },
+          tone: { type: 'string' },
+          language: { type: 'string' },
+          platform: { type: 'string' },
+          description: { type: 'string' }
+        }
+      },
+      aiGeneration: {
+        type: 'object',
+        properties: {
+          enabled: { type: 'boolean' },
+          prompt: { type: 'string' },
+          config: {
+            type: 'object',
+            properties: {
+              targetAudience: { type: 'string' },
+              tone: { type: 'string' },
+              keywords: { type: 'array', items: { type: 'string' } },
+              platform: { type: 'string' },
+              type: { type: 'string' }
+            }
+          }
+        }
+      },
       parameters: {
         type: 'object',
         properties: {
@@ -98,8 +132,8 @@ const listContentSchema = {
     type: 'object',
     properties: {
       userId: { type: 'string' },
-      type: { type: 'string', enum: ['TEXT', 'IMAGE', 'VIDEO'] },
-      status: { type: 'string', enum: ['DRAFT', 'PUBLISHED', 'ARCHIVED'] },
+      type: { type: 'string', enum: ['text', 'image', 'video', 'audio', 'mixed'] },
+      status: { type: 'string', enum: ['draft', 'generating', 'reviewing', 'published', 'failed', 'archived'] },
       tags: { type: 'string' },
       fromDate: { type: 'string', format: 'date-time' },
       toDate: { type: 'string', format: 'date-time' },

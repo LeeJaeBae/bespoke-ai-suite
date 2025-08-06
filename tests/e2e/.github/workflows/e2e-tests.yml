@@ -1,0 +1,356 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run nightly at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      test_suite:
+        description: 'Test suite to run'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - smoke
+          - auth
+          - content
+          - api
+          - performance
+          - visual
+
+env:
+  NODE_ENV: test
+  FRONTEND_URL: http://localhost:3005
+  CONTENT_SERVICE_URL: http://localhost:8081
+  USER_SERVICE_URL: http://localhost:8082
+  CAMPAIGN_SERVICE_URL: http://localhost:8083
+  ANALYTICS_SERVICE_URL: http://localhost:8084
+
+jobs:
+  e2e-tests:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+        shard: [1, 2, 3, 4]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+          
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd tests/e2e && npm ci
+      
+      - name: Start Docker services
+        run: |
+          docker-compose up -d postgres mongodb redis kafka weaviate minio
+          sleep 30 # Wait for services to be ready
+          
+      - name: Build services
+        run: |
+          # Build Content Service
+          cd services/content && npm run build
+          
+          # Build User Service  
+          cd services/user && go build -o user-service cmd/server/main.go
+          
+          # Build Campaign Service
+          cd services/campaign && pip install -r requirements.txt
+          
+          # Build Analytics Service
+          cd services/analytics && ./gradlew build -x test
+          
+          # Build Frontend
+          cd frontend && npm run build
+          
+      - name: Start services
+        run: |
+          # Start User Service
+          cd services/user && ./user-service &
+          
+          # Start Content Service
+          cd services/content && npm start &
+          
+          # Start Campaign Service
+          cd services/campaign && python src/main.py &
+          
+          # Start Analytics Service
+          cd services/analytics && java -jar build/libs/analytics-service.jar &
+          
+          # Start Frontend
+          cd frontend && npm start &
+          
+          # Wait for services to be ready
+          sleep 60
+          
+      - name: Health check services
+        run: |
+          curl -f http://localhost:3005 || exit 1
+          curl -f http://localhost:8081/health || exit 1
+          curl -f http://localhost:8082/health || exit 1
+          curl -f http://localhost:8083/health || exit 1
+          curl -f http://localhost:8084/health || exit 1
+      
+      - name: Install Playwright browsers
+        run: cd tests/e2e && npx playwright install --with-deps ${{ matrix.browser }}
+      
+      - name: Run E2E tests
+        run: |
+          cd tests/e2e
+          
+          # Determine test command based on input or default
+          TEST_SUITE="${{ github.event.inputs.test_suite || 'all' }}"
+          
+          case $TEST_SUITE in
+            smoke)
+              npx playwright test --project=${{ matrix.browser }} --grep @smoke --shard=${{ matrix.shard }}/4
+              ;;
+            auth)
+              npx playwright test --project=${{ matrix.browser }} --grep @auth --shard=${{ matrix.shard }}/4
+              ;;
+            content)
+              npx playwright test --project=${{ matrix.browser }} --grep @content --shard=${{ matrix.shard }}/4
+              ;;
+            api)
+              npx playwright test --project=${{ matrix.browser }} --grep @api --shard=${{ matrix.shard }}/4
+              ;;
+            performance)
+              npx playwright test --project=${{ matrix.browser }} --grep @performance --shard=${{ matrix.shard }}/4
+              ;;
+            visual)
+              npx playwright test --project=${{ matrix.browser }} --grep @visual --shard=${{ matrix.shard }}/4
+              ;;
+            *)
+              npx playwright test --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/4
+              ;;
+          esac
+      
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-results-${{ matrix.browser }}-${{ matrix.shard }}
+          path: |
+            tests/e2e/test-results/
+            tests/e2e/playwright-report/
+          retention-days: 30
+          
+      - name: Upload performance benchmarks
+        if: always() && contains(github.event.inputs.test_suite, 'performance')
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-benchmarks-${{ matrix.browser }}-${{ matrix.shard }}
+          path: tests/e2e/test-results/performance/
+          retention-days: 90
+      
+      - name: Comment PR with test results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            try {
+              const resultsPath = 'tests/e2e/test-results/test-results.json';
+              if (fs.existsSync(resultsPath)) {
+                const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
+                
+                const comment = `## 🎭 E2E Test Results - ${{ matrix.browser }} (Shard ${{ matrix.shard }})
+                
+                - ✅ Passed: ${results.passed || 0}
+                - ❌ Failed: ${results.failed || 0}
+                - ⏭️ Skipped: ${results.skipped || 0}
+                - 🎯 Total: ${results.total || 0}
+                
+                Duration: ${results.duration || 'N/A'}
+                
+                [View detailed results](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})
+                `;
+                
+                github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: comment
+                });
+              }
+            } catch (error) {
+              console.log('Could not post test results comment:', error);
+            }
+
+  merge-reports:
+    name: Merge Test Reports
+    if: always()
+    needs: e2e-tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: cd tests/e2e && npm ci
+        
+      - name: Download all test results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: e2e-results-*
+          path: tests/e2e/test-results/
+          
+      - name: Merge test reports
+        run: |
+          cd tests/e2e
+          npx playwright merge-reports --reporter=html,json test-results/
+          
+      - name: Upload merged report
+        uses: actions/upload-artifact@v4
+        with:
+          name: merged-e2e-report
+          path: |
+            tests/e2e/playwright-report/
+            tests/e2e/test-results/
+          retention-days: 30
+          
+      - name: Deploy test report to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: tests/e2e/playwright-report
+          destination_dir: e2e-reports/${{ github.run_number }}
+
+  lighthouse-audit:
+    name: Lighthouse Performance Audit
+    if: contains(github.event.inputs.test_suite, 'performance') || github.event.inputs.test_suite == 'all' || github.event.inputs.test_suite == ''
+    needs: e2e-tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Start services (simplified)
+        run: |
+          # Start minimal services for Lighthouse audit
+          npm run docker:up
+          sleep 30
+          
+      - name: Run Lighthouse audit
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: './tests/e2e/lighthouserc.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          
+      - name: Upload Lighthouse results
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: .lighthouseci/
+          retention-days: 30
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Run OWASP ZAP scan
+        uses: zaproxy/action-full-scan@v0.7.0
+        with:
+          target: 'http://localhost:3005'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a'
+          
+      - name: Upload ZAP results
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-scan-results
+          path: report_html.html
+          retention-days: 30
+
+  notify-failure:
+    name: Notify on Failure
+    if: failure() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+    needs: [e2e-tests, merge-reports]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Send Slack notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          channel: '#e2e-tests'
+          text: |
+            🚨 E2E Tests Failed on ${{ github.ref }}
+            
+            Repository: ${{ github.repository }}
+            Commit: ${{ github.sha }}
+            Author: ${{ github.actor }}
+            
+            [View Results](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  update-badge:
+    name: Update Badge
+    if: github.ref == 'refs/heads/main'
+    needs: merge-reports
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Update test badge
+        uses: schneegans/dynamic-badges-action@v1.6.0
+        with:
+          auth: ${{ secrets.GITHUB_TOKEN }}
+          gistID: ${{ secrets.BADGE_GIST_ID }}
+          filename: e2e-tests-badge.json
+          label: E2E Tests
+          message: passing
+          color: green

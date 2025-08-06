@@ -62,7 +62,7 @@ func LoadConfig() (*Config, error) {
 	viper.AddConfigPath("./config")
 
 	// Set default values
-	viper.SetDefault("server.port", "3003")
+	viper.SetDefault("server.port", "8084")
 	viper.SetDefault("server.readTimeout", "15s")
 	viper.SetDefault("server.writeTimeout", "15s")
 	viper.SetDefault("server.idleTimeout", "120s")

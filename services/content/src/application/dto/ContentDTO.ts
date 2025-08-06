@@ -4,15 +4,25 @@ import { ContentType, ContentStatus, ContentMetadata } from '@domain/value-objec
 export interface CreateContentRequest {
   type: ContentType;
   title: string;
-  prompt: string;
-  metadata?: {
-    keywords?: string[];
-    tags?: string[];
-    targetAudience?: string;
-    tone?: string;
-    language?: string;
-  };
+  prompt?: string; // Optional for AI generation
+  description?: string;
+  platform?: string;
+  status?: ContentStatus;
+  tags?: string[];
+  metadata?: Partial<ContentMetadata>;
   userId: string; // This will be injected from JWT token
+  // AI Generation fields
+  aiGeneration?: {
+    enabled: boolean;
+    prompt?: string;
+    config?: {
+      targetAudience?: string;
+      tone?: string;
+      keywords?: string[];
+      platform?: string;
+      type?: string;
+    };
+  };
 }
 
 export interface UpdateContentRequest {
@@ -62,6 +72,12 @@ export interface ContentResponse {
 export interface CreateContentResponse {
   content: ContentResponse;
   message: string;
+  aiMetrics?: {
+    qualityScore: number;
+    seoScore: number;
+    readabilityScore: number;
+    engagementPrediction: number;
+  };
 }
 
 export interface ListContentResponse {

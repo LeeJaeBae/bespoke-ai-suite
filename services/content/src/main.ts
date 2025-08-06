@@ -13,8 +13,10 @@ import { ContentController } from './infrastructure/controllers/ContentControlle
 import { MongoContentRepository } from './infrastructure/repositories/MongoContentRepository.js';
 
 // Import external services
-import { CrewAIClient } from './infrastructure/external/CrewAIClient.js';
+import { CrewAIAgentService } from './infrastructure/external/CrewAIAgentService.js';
+import { WeaviateRAGService } from './infrastructure/external/WeaviateRAGService.js';
 import { KafkaEventPublisher } from './infrastructure/external/KafkaEventPublisher.js';
+import { LLMManager } from './infrastructure/external/LLMManager.js';
 
 // Import use cases
 import { CreateContentUseCase } from './application/use-cases/CreateContentUseCase.js';
@@ -90,11 +92,79 @@ async function bootstrap() {
   // Initialize repositories
   const contentRepository = new MongoContentRepository();
 
+  // Initialize LLM Manager
+  const llmManager = new LLMManager(
+    {
+      primary: {
+        provider: config.llm.primary.provider,
+        apiKey: config.llm.primary.apiKey,
+        model: config.llm.primary.model,
+        temperature: config.llm.primary.temperature,
+        maxTokens: config.llm.primary.maxTokens
+      },
+      fallback: config.llm.fallback ? {
+        provider: config.llm.fallback.provider,
+        apiKey: config.llm.fallback.apiKey,
+        model: config.llm.fallback.model,
+        temperature: config.llm.fallback.temperature,
+        maxTokens: config.llm.fallback.maxTokens
+      } : undefined,
+      retryAttempts: config.llm.retryAttempts,
+      retryDelay: config.llm.retryDelay
+    },
+    fastify.log
+  );
+  
   // Initialize external services
-  const crewAIService = new CrewAIClient({
-    baseUrl: config.crewAI.baseUrl,
-    apiKey: config.crewAI.apiKey
-  });
+  const aiAgentService = new CrewAIAgentService(
+    {
+      apiKey: config.crewAI.apiKey,
+      baseUrl: config.crewAI.baseUrl,
+      model: config.crewAI.model || 'claude-3-opus',
+      temperature: config.crewAI.temperature || 0.7,
+      maxTokens: config.crewAI.maxTokens || 4000,
+      timeout: config.crewAI.timeout || 30000,
+      retryAttempts: config.crewAI.retryAttempts || 3,
+      fallbackStrategy: config.crewAI.fallbackStrategy || 'local'
+    },
+    fastify.log,
+    llmManager // Pass LLM Manager to Crew AI service
+  );
+
+  // Initialize RAG service
+  const ragService = new WeaviateRAGService(
+    {
+      weaviate: {
+        scheme: config.rag.weaviate.scheme,
+        host: config.rag.weaviate.host,
+        apiKey: config.rag.weaviate.apiKey
+      },
+      openai: {
+        apiKey: config.rag.openai.apiKey,
+        model: config.rag.openai.embeddingModel,
+        dimensions: config.rag.openai.dimensions
+      },
+      collection: {
+        name: config.rag.collection.name,
+        distance: config.rag.collection.distance
+      },
+      processing: {
+        chunkSize: config.rag.processing.chunkSize,
+        chunkOverlap: config.rag.processing.chunkOverlap,
+        embeddingModel: config.rag.openai.embeddingModel
+      }
+    },
+    fastify.log
+  );
+
+  // Initialize RAG service collection
+  try {
+    await ragService.initialize();
+    fastify.log.info('RAG service initialized successfully');
+  } catch (error) {
+    fastify.log.error('Failed to initialize RAG service:', error);
+    // Continue without RAG for now
+  }
 
   const eventPublisher = new KafkaEventPublisher({
     brokers: config.kafka.brokers,
@@ -104,7 +174,7 @@ async function bootstrap() {
   // Initialize use cases
   const createContentUseCase = new CreateContentUseCase(
     contentRepository,
-    crewAIService,
+    aiAgentService,
     eventPublisher
   );
   const getContentUseCase = new GetContentUseCase(contentRepository);

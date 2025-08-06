@@ -8,6 +8,7 @@ export interface ContentProps {
   userId: string;
   prompt?: string;
   metadata?: ContentMetadata;
+  status?: ContentStatus;
 }
 
 export class Content {
@@ -80,7 +81,7 @@ export class Content {
       props.body.trim(),
       props.userId,
       props.prompt,
-      ContentStatus.DRAFT,
+      props.status || ContentStatus.DRAFT,
       metadata,
       now,
       now
